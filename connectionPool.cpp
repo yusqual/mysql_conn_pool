@@ -41,7 +41,7 @@ void connectionPool::addConn() {
 void connectionPool::produceConn() {
     while (m_open) {
         std::unique_lock<std::mutex> locker(m_mutexQ);
-        m_cv_producer.wait(locker, [&] { return (m_connQueue.size() < m_minSize) || !m_open; });
+        m_cv_producer.wait(locker, [&] { return (m_connQueue.size() < m_minSize && m_allAliveNum < m_maxSize) || !m_open; });
         if (m_open) addConn();
         m_cv_consumer.notify_all();
     }
