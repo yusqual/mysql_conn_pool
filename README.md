@@ -17,6 +17,9 @@
     find_package(jsoncpp CONFIG REQUIRED)
     target_link_libraries(main PRIVATE mysqlclient JsonCpp::JsonCpp)
 
+    # 在构建时需要将 dbConfig.json 文件复制到正确的输出目录
+    configure_file(dbConfig.json ${CMAKE_CURRENT_BINARY_DIR}/dbConfig.json COPYONLY)
+
 ### vcpkg
     # 安装三方库的最后,会提示该库在CMakeLists.txt中需要添加的参数,如:
 
