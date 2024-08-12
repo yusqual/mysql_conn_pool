@@ -18,7 +18,7 @@ void op2(connectionPool* pool, int begin, int end) {
     }
 }
 
-void test1() {
+void test1() {  // 单线程测试
 #if 1
     auto begin = std::chrono::steady_clock::now();
     op1(0, 5000);
@@ -37,7 +37,7 @@ void test1() {
 #endif
 }
 
-void test2() {
+void test2() {  // 多线程测试
 #if 0
     mysqlConn conn;
     conn.connect("root", "0", "db_test", "localhost");  // 提前连接一次防止多个连接同时连接出问题
